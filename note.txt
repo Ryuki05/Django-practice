@@ -1,0 +1,51 @@
+## Djangoのインストール
+ターミナルから
+>pip install django==4.2.2
+
+# Djangoのアップデート
+ターミナルから
+>pip install -U django
+
+## djangoのプロジェクトの作成
+ターミナルから
+>django-admin startproject django_app
+
+## サーバの起動（djangoの簡易webサーバ）
+django_app >py manage.py runserver
+
+## webアプリケーション(hello)の作成
+django_app >py manage.py startapp hello
+
+## マイグレーションファイルの作成
+py manage.py makemigrations hello
+
+## マイグレーションファイルの実行
+py manage.py migrate
+
+
+## 管理者設定
+username:admin
+mailaddress:admin@admin.admin
+password:adminadmin
+
+## 管理者作成
+py manage.py createsuperuser
+
+githubにの操作手順
+githubで新しくリポジトリを作る
+作ったリポジトリを任意のディレクトリーまで来たところで以下のコマンドを打つ
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git clone https://github.com/YourName/repositories-name.git //これでリポジトリディレクトリーができる
+呼び出したリポジトリディレクトリに移動
+git add .
+git commit --allow-empty -m "first commit" //空でもできる
+     or
+git commit -m ' ' //変更を記録
+git push
+git pull //ここで変更が反映される
+
+※文字コードでエラーが出た場合
+git config --global core.autocrlf true
+改行コードの違いを改善
+

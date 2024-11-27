@@ -1,0 +1,46 @@
+composerのインストール
+composer install
+
+
+githubにの操作手順
+githubで新しくリポジトリを作る
+作ったリポジトリを任意のディレクトリーまで来たところで以下のコマンドを打つ
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git clone https://github.com/YourName/repositories-name.git //これでリポジトリディレクトリーができる
+呼び出したリポジトリディレクトリに移動
+git add .
+git commit --allow-empty -m "first commit" //空でもできる
+     or
+git commit -m ' ' //変更を記録
+git push
+git pull //ここで変更が反映される
+
+※文字コードでエラーが出た場合
+git config --global core.autocrlf true
+改行コードの違いを改善
+
+Laravel 10 プロジェクトの作成
+composer create-project --prefer-dist laravel/laravel:10.* appName
+
+Next.jsプロジェクトの作成
+npx create-next-app@latest appName //最新バージョンで作成される
+npx create-next-app@14 my-next-app //バージョンを指定して作成
+
+
+php artisan make:model ModelName -a
+このコマンドは、以下のものを一度に生成します：
+
+モデル (app/Models/ModelName.php)
+マイグレーション (database/migrations/xxxx_xx_xx_xxxxxx_create_model_names_table.php)
+コントローラ (app/Http/Controllers/ModelNameController.php)
+ファクトリー (database/factories/ModelNameFactory.php)
+シーダー (database/seeders/ModelNameSeeder.php)
+
+
+findOrFail($id) は、LaravelのEloquent ORMにおけるメソッドで、指定したIDに基づいてデータベースからレコードを検索します。このメソッドの具体的な動作は以下の通りです。
+機能
+レコードの取得: $id で指定したIDのレコードを検索します。
+存在しない場合の処理:
+もし指定したIDのレコードが存在する場合、そのレコードを返します。
+レコードが存在しない場合、HTTPステータスコード404（Not Found）の例外がスローされます。このため、特定のリソースが見つからない場合に適切なエラーハンドリングができます。
