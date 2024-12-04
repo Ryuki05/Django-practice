@@ -11,16 +11,12 @@ class CustomerNumbering(models.Model):
 
 # 得意先テーブル
 class Customer(models.Model):
-    customer_code = models.CharField(primary_key=True, max_length=6)  # テキスト型、6桁
-    name = models.CharField(max_length=32)  # 得意先名称
-    phone_number = models.CharField(max_length=13)  # 電話番号
-    postal_code = models.CharField(max_length=8)  # 郵便番号
-    address = models.CharField(max_length=40)  # 住所
-    discount_rate = models.PositiveSmallIntegerField()  # 割引率
-    delete_flag = models.BooleanField(default=False)  # 削除フラグ
-
-    class Meta:
-        db_table = "customer"
+    customer_code = models.CharField(max_length=6)  # テキスト型、6桁
+    customer_name = models.CharField(max_length=32)  # 得意先名称
+    customer_telno = models.CharField(max_length=13)  # 電話番号
+    customer_postalcode = models.CharField(max_length=8)  # 郵便番号
+    customer_address = models.CharField(max_length=40)  # 住所
+    discount_rate = models.IntegerField()  # 割引率
 
 
 # 従業員テーブル
