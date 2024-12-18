@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+
+##component
+def header(request):
+    params = {
+        'title': '管理メニュー',
+    }
+    return render(request, 'header.html', params)
+
 # index
 def index(request):
     params = {
@@ -13,7 +21,7 @@ def index(request):
 @login_required(login_url="/admin/login/")
 def mainmenu(request):
     params = {
-        "title": "管理メニュー",
+        "title": "管理システム",
         "sub_title": "管理メニュー",
     }
     return render(request, 'psys/MainMenu.html', params)
@@ -23,6 +31,6 @@ def mainmenu(request):
 def customermanagementmenu(request):
     params = {
         "title": "管理メニュー",
-        "sub_title": "得意先管理メニュー",
+        "sub_title": "管理メニュー",
     }
     return render(request,'psys/CustomerManagementMenu.html', params)

@@ -4,24 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'psys/css/style.css' %}">
-    <title>Document</title>
+    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+    <title>{{ title }}</title>
 </head>
 <body>
     <main>
-        <div>
-            <h2 id="contents_title">{{sub_title}}</h2>
-        </div>
-        <div id = "contents">
+        {% include 'header.html' %}
+        <div id="contents">
             <div id="navi">
                 <ul>
-                    <li><a href="">ログアウト</a></li>
+                    <li><a class="p-1 rounded-lg m-5 border-2 border-gray-400 bg-gray-200" href="">ログアウト</a></li>
                 </ul>
             </div>
-            <div id="navi">
-                <ul>
-                    <li><a href="{% url 'CustomerManagementMenu' %}">得意先管理メニュー</a></li>
-                    <li><a href="">得意先集計メニュー</a></li>
+            <div class=" text-center" id="navi">
+                <h2 class=" font-bold text-gray-600 text-3xl">{{ sub_title }}</h2>
+                <ul >
+                    <li class="py-3"><a class="p-1 rounded-lg border-2 border-gray-400 bg-gray-200" href="{% url 'CustomerManagementMenu' %}">得意先管理メニュー</a></li>
+                    <li class="py-3"    ><a class="p-1 rounded-lg border-2 border-gray-400 bg-gray-200" href="">得意先集計メニュー</a></li>
                 </ul>
             </div>
         </div>

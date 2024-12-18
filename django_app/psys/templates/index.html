@@ -4,17 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'psys/css/style.css' %}">
+    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
     <title>トップページ</title>
 </head>
 <body>
-    <header>
-        <h1>管理システム</h1>
-    </header>
+    {% include 'header.html' %}
     <main>
-        <div>
-            <h2 id="contents_title">{{ sub_title }}</h2>
-        </div>
+        
         <div id="contents">
             <div id="navi">
                 <ul>
