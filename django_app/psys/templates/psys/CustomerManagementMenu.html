@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'psys/css/style.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div>
+            <h2 id="contents_title">{{sub_title}}</h2>
+        </div>
+        <div id = "contents">
+            <div id="navi">
+                <ul>
+                    <li><a href="">管理メニュー</a></li>
+                </ul>
+            </div>
+            <div id="navi">
+                <ul>
+                    <li><a href="">得意先一覧</a></li>
+                    <li><a href="">得意先検索</a></li>
+                    <li><a href="">得意先登録</a></li>
+                    <li><a href="">得意先削除</a></li>
+                    <li><a href="">得意先更新</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
