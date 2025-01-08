@@ -8,18 +8,18 @@
         {% csrf_token %}
         
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="employee_no">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="employee_number">
                 従業員番号
             </label>
-            <input type="text" name="employee_no" id="employee_no" required
+            <input type="text" name="employee_number" id="employee_number" required
                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="employee_name">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                 従業員名
             </label>
-            <input type="text" name="employee_name" id="employee_name" required
+            <input type="text" name="name" id="name" required
                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
 
@@ -46,7 +46,7 @@
             </button>
             <a href="{% url 'psys:main_menu' %}" 
                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                ロインメニューに戻る
+                メインメニューに戻る
             </a>
         </div>
     </form>

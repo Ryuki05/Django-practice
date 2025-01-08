@@ -3,25 +3,25 @@
 {% block title %}メインメニュー{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">管理システム</h1>
+<div class="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <h1 class="mb-8 text-3xl font-bold text-gray-900">管理システム</h1>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- 得意先管理 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div class="overflow-hidden transition-shadow duration-300 bg-white shadow-lg rounded-xl hover:shadow-xl">
             <div class="p-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                               d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">得意先管理</h2>
-                <p class="text-gray-600 mb-4">得意先の登録・編集・検索</p>
+                <h2 class="mb-2 text-xl font-semibold text-gray-800">得意先管理</h2>
+                <p class="mb-4 text-gray-600">得意先の登録・編集・検索</p>
                 <a href="{% url 'psys:customer_list' %}" 
                    class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     開く
-                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
@@ -29,20 +29,20 @@
         </div>
 
         <!-- 受注管理 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div class="overflow-hidden transition-shadow duration-300 bg-white shadow-lg rounded-xl hover:shadow-xl">
             <div class="p-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-r from-green-400 to-green-600">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">受注管理</h2>
-                <p class="text-gray-600 mb-4">受注情報の登録・管理</p>
+                <h2 class="mb-2 text-xl font-semibold text-gray-800">受注管理</h2>
+                <p class="mb-4 text-gray-600">受注情報の登録・管理</p>
                 <a href="{% url 'psys:order_list' %}" 
                    class="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-500">
                     開く
-                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
@@ -50,20 +50,20 @@
         </div>
 
         <!-- 商品管理 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div class="overflow-hidden transition-shadow duration-300 bg-white shadow-lg rounded-xl hover:shadow-xl">
             <div class="p-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-r from-yellow-400 to-yellow-600">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                               d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                     </svg>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">商品管理</h2>
-                <p class="text-gray-600 mb-4">商品の登録・在庫管理</p>
+                <h2 class="mb-2 text-xl font-semibold text-gray-800">商品管理</h2>
+                <p class="mb-4 text-gray-600">商品の登録・在庫管理</p>
                 <a href="{% url 'psys:item_list' %}" 
                    class="inline-flex items-center text-sm font-medium text-yellow-600 hover:text-yellow-500">
                     開く
-                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
@@ -71,20 +71,20 @@
         </div>
 
         <!-- 従業員登録 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div class="overflow-hidden transition-shadow duration-300 bg-white shadow-lg rounded-xl hover:shadow-xl">
             <div class="p-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-r from-purple-400 to-purple-600">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                               d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">従業員登録</h2>
-                <p class="text-gray-600 mb-4">新規従業員の登録</p>
+                <h2 class="mb-2 text-xl font-semibold text-gray-800">従業員登録</h2>
+                <p class="mb-4 text-gray-600">新規従業員の登録</p>
                 <a href="{% url 'psys:employee_create' %}" 
                    class="inline-flex items-center text-sm font-medium text-purple-600 hover:text-purple-500">
                     開く
-                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
