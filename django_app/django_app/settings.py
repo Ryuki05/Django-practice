@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'psysdb',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Pa$$w0rd',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -140,3 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TAILWIND_APP_NAME = 'theme'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+AUTH_USER_MODEL = 'psys.Employee'
+
+LOGIN_URL = 'psys:login'
+LOGIN_REDIRECT_URL = 'psys:main_menu'
+LOGOUT_REDIRECT_URL = 'psys:login'

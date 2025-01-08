@@ -1,0 +1,149 @@
+/* 基本スタイル */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+#navi {
+    background-color: #333;
+    padding: 0.5rem 0;
+}
+
+#navi ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#navi ul li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+#navi ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#navi ul li a:hover {
+    color: #ddd;
+}
+
+/* メインコンテンツ */
+#contents {
+    padding: 2rem;
+}
+
+/* フォーム関連 */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.error-message {
+    color: red;
+    margin: 1rem 0;
+}
+
+/* メニュー */
+.menu-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.menu-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-list ul li {
+    margin-bottom: 1rem;
+}
+
+.menu-list ul li a {
+    display: block;
+    padding: 1rem 2rem;
+    background-color: #f5f5f5;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu-list ul li a:hover {
+    background-color: #e0e0e0;
+}
+
+.register-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.register-container h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.register-container button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background-color: #444;
+}
+
+/* 既存のCSSに追加 */
+.messages {
+    margin-bottom: 1rem;
+}
+
+.alert {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+} 

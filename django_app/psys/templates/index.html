@@ -4,22 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
-    <title>トップページ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}トップページ{% endblock %}</title>
 </head>
-<body>
-    {% include 'header.html' %}
-    <main>
-        
-        <div id="contents">
-            <div id="navi">
-                <ul>
-                    <li><a href="{% url 'MainMenu' %}">ログイン</a></li>
-                    <li><a href="#">新規登録</a></li>
-                </ul>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <!-- ヘッダー -->
+        <nav class="bg-gray-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <span class="text-white text-xl font-bold">得意先管理システム</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <a href="{% url 'psys:main_menu' %}" 
+                           class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            メインメニュー
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
-    <footer></footer>
+        </nav>
+
+        <!-- メインコンテンツ -->
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- フッター -->
+        <footer class="bg-gray-800 fixed bottom-0 w-full">
+            <div class="max-w-7xl mx-auto py-4 px-4">
+                <p class="text-center text-gray-300 text-sm">
+                    &copy; 2024 得意先管理システム
+                </p>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

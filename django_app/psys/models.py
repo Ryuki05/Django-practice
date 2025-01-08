@@ -1,146 +1,98 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.utils import timezone
 
+class EmployeeManager(BaseUserManager):
+    def create_user(self, employee_number, name, password=None):
+        if not employee_number:
+            raise ValueError('従業員番号は必須です')
+        user = self.model(
+            employee_number=employee_number,
+            name=name,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-# 得意先採番テーブル
+    def create_superuser(self, employee_number, name, password):
+        user = self.create_user(
+            employee_number=employee_number,
+            name=name,
+            password=password,
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+class Employee(AbstractBaseUser, PermissionsMixin):
+    employee_number = models.CharField('従業員番号', max_length=6, primary_key=True)
+    name = models.CharField('従業員名', max_length=32)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    last_login = models.DateTimeField('最終ログイン', null=True, blank=True)
+    date_joined = models.DateTimeField('登録日', default=timezone.now)
+
+    objects = EmployeeManager()
+
+    USERNAME_FIELD = 'employee_number'
+    REQUIRED_FIELDS = ['name']
+
+    def __str__(self):
+        return f"{self.employee_number}: {self.name}"
+
+    class Meta:
+        db_table = 'employee'
+
 class CustomerNumbering(models.Model):
-    customer_code = models.PositiveIntegerField(primary_key=True)  # 数値型、4桁
+    customer_code = models.PositiveIntegerField(primary_key=True)
 
     class Meta:
-        db_table = "customer_numbering"
+        db_table = 'customer_numbering'
 
-
-# 得意先テーブル
 class Customer(models.Model):
-    customer_code = models.CharField(max_length=6)  # テキスト型、6桁
-    customer_name = models.CharField(max_length=32)  # 得意先名称
-    customer_telno = models.CharField(max_length=13)  # 電話番号
-    customer_postalcode = models.CharField(max_length=8)  # 郵便番号
-    customer_address = models.CharField(max_length=40)  # 住所
-    discount_rate = models.IntegerField()  # 割引率
+    customer_code = models.CharField('得意先コード', max_length=10, primary_key=True)
+    customer_name = models.CharField('得意先名', max_length=100)
+    customer_telno = models.CharField('電話番号', max_length=20, null=True, blank=True)
+    customer_postalcode = models.CharField('郵便番号', max_length=8, null=True, blank=True)
+    customer_address = models.CharField('住所', max_length=200, null=True, blank=True)
+    discount_rate = models.DecimalField('割引率', max_digits=5, decimal_places=2, default=0)
+    delete_flag = models.BooleanField('削除フラグ', default=False)
 
+    def __str__(self):
+        return self.customer_name
 
-# 従業員テーブル
-class Employee(models.Model):
-    employee_number = models.CharField(primary_key=True, max_length=6)  # 従業員番号
-    name = models.CharField(max_length=32)  # 従業員名
-    password = models.CharField(max_length=6)  # パスワード
-
-    class Meta:
-        db_table = "employee"
-
-
-# 商品テーブル
 class Item(models.Model):
-    item_code = models.CharField(primary_key=True, max_length=6)  # 商品コード
-    name = models.CharField(max_length=32)  # 商品名称
-    price = models.PositiveIntegerField()  # 単価
-    stock = models.PositiveIntegerField()  # 在庫数
+    item_code = models.CharField('商品コード', max_length=10, primary_key=True)
+    item_name = models.CharField('商品名', max_length=100)
+    price = models.IntegerField('単価', default=0)
+    stock_quantity = models.IntegerField('在庫数', default=0)
+    delete_flag = models.BooleanField('削除フラグ', default=False)
 
-    class Meta:
-        db_table = "item"
+    def __str__(self):
+        return self.item_name
 
-
-# 受注テーブル
 class Orders(models.Model):
-    order_number = models.CharField(primary_key=True, max_length=6)  # 受注番号
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)  # 外部キー: 得意先コード
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)  # 外部キー: 従業員番号
-    total_amount = models.PositiveIntegerField()  # 受注合計金額
-    detail_count = models.PositiveSmallIntegerField()  # 受注明細件数
-    delivery_date = models.DateField()  # 納入日
-    order_date = models.DateField()  # 受注日
+    order_number = models.CharField('受注番号', max_length=10, primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name='得意先')
+    order_date = models.DateField('受注日', default=timezone.now)
+    delivery_date = models.DateField('納期', null=True, blank=True)
+    delete_flag = models.BooleanField('削除フラグ', default=False)
+
+    def __str__(self):
+        return self.order_number
 
     class Meta:
-        db_table = "orders"
+        verbose_name = '受注'
+        verbose_name_plural = '受注'
 
-
-# 受注明細テーブル
 class OrderDetails(models.Model):
-    order = models.ForeignKey(Orders, on_delete=models.CASCADE)  # 外部キー: 受注番号
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)  # 外部キー: 商品コード
-    order_quantity = models.PositiveIntegerField()  # 受注数量
-    order_amount = models.PositiveIntegerField()  # 受注金額
-
-    class Meta:
-        db_table = "order_details"
-        unique_together = (('order', 'item'),)
-
-
-# Django標準のテーブルはそのまま使用します。
-# Auth関連、Adminログ、セッション、マイグレーションテーブル
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
-
-    class Meta:
-        managed = False
-        db_table = "auth_group"
-
-
-class AuthGroupPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey("AuthPermission", models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = "auth_group_permissions"
-        unique_together = (("group", "permission"),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey("DjangoContentType", models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = "auth_permission"
-        unique_together = (("content_type", "codename"),)
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = "auth_user"
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = "django_content_type"
-        unique_together = (("app_label", "model"),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = "django_migrations"
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = "django_session"
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.PROTECT, verbose_name='商品')
+    order_quantity = models.IntegerField('数量', default=0)
+    
+    @property
+    def order_amount(self):
+        return self.item.price * self.order_quantity
