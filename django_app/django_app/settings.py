@@ -143,6 +143,10 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 AUTH_USER_MODEL = 'psys.Employee'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 LOGIN_URL = 'psys:login'
 LOGIN_REDIRECT_URL = 'psys:main_menu'
 LOGOUT_REDIRECT_URL = 'psys:login'

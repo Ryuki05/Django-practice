@@ -18,11 +18,25 @@
                             <span class="text-xl font-bold text-white">得意先管理システム</span>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center space-x-4">
                         <a href="{% url 'psys:main_menu' %}" 
                            class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white">
                             メインメニュー
                         </a>
+                        {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'psys:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white">
+                                    ログアウト
+                                </button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'psys:login' %}" 
+                               class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white">
+                                ログイン
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

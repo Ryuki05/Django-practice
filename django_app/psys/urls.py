@@ -1,11 +1,18 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 app_name = 'psys'
 
 urlpatterns = [
     # メインメニュー
     path('', views.MainMenuView.as_view(), name='main_menu'),
+
+    # ログイン関連
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(next_page='psys:main_menu'), name='logout'),
+
+     path('signup/', views.SignUpView.as_view(), name='signup'),
 
     # 得意先管理
     path('customer/', views.CustomerListView.as_view(), name='customer_list'),

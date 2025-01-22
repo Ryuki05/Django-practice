@@ -6,6 +6,7 @@ class EmployeeManager(BaseUserManager):
     def create_user(self, employee_number, name, password=None):
         if not employee_number:
             raise ValueError('従業員番号は必須です')
+        
         user = self.model(
             employee_number=employee_number,
             name=name,
@@ -14,7 +15,7 @@ class EmployeeManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, employee_number, name, password):
+    def create_superuser(self, employee_number, name, password=None):
         user = self.create_user(
             employee_number=employee_number,
             name=name,
@@ -27,12 +28,11 @@ class EmployeeManager(BaseUserManager):
         return user
 
 class Employee(AbstractBaseUser, PermissionsMixin):
-    employee_number = models.CharField('従業員番号', max_length=6, primary_key=True)
+    employee_number = models.CharField('従業員番号', max_length=12, primary_key=True)
     name = models.CharField('従業員名', max_length=32)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    last_login = models.DateTimeField('最終ログイン', null=True, blank=True)
+    is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField('登録日', default=timezone.now)
 
     objects = EmployeeManager()
@@ -41,10 +41,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name']
 
     def __str__(self):
-        return f"{self.employee_number}: {self.name}"
-
-    class Meta:
-        db_table = 'employee'
+        return self.name
 
 class CustomerNumbering(models.Model):
     customer_code = models.PositiveIntegerField(primary_key=True)

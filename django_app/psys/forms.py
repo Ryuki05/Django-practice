@@ -2,37 +2,21 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import Employee, Customer, Orders, OrderDetails, Item
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'ユーザー名'
-    }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'パスワード'
-    }))
-
 class EmployeeRegistrationForm(forms.ModelForm):
-    name = forms.CharField(label='名前')
+    employee_no = forms.CharField(label='従業員番号', max_length=8)
+    name = forms.CharField(label='名前', max_length=100)
     password = forms.CharField(label='パスワード', widget=forms.PasswordInput)
 
     class Meta:
         model = Employee
-        fields = ('name',)
+        fields = ('employee_number', 'name', 'password')
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        # 従業員番号の自動採番（最後の番号+1）
-        last_employee = Employee.objects.order_by('-employee_number').first()
-        if last_employee:
-            next_number = int(last_employee.employee_number) + 1
-        else:
-            next_number = 1
-        user.employee_number = f"{next_number:04d}"
-        user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
-        return user
+    def clean_employee_no(self):
+        employee_number = self.cleaned_data['employee_no']
+        if Employee.objects.filter(employee_number=employee_number).exists():
+            raise forms.ValidationError('この従業員番号は既に使用されています。')
+        return employee_number
+
 
 class CustomerForm(forms.ModelForm):
     class Meta:
