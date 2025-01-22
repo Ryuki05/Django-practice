@@ -61,7 +61,7 @@ class OrderForm(forms.ModelForm):
 
     def clean_order_number(self):
         order_number = self.cleaned_data['order_number']
-        if self.instance.pk is None:  # 新規登録の場合のみ重複チェック
+        if self.instance.pk is None: 
             if Orders.objects.filter(order_number=order_number).exists():
                 raise forms.ValidationError('この受注番号は既に使用されています。')
         return order_number
@@ -107,7 +107,7 @@ class ItemForm(forms.ModelForm):
 
     def clean_item_code(self):
         item_code = self.cleaned_data['item_code']
-        if self.instance.pk is None:  # 新規登録の場合のみ重複チェック
+        if self.instance.pk is None:  
             if Item.objects.filter(item_code=item_code).exists():
                 raise forms.ValidationError('この商品コードは既に使用されています。')
         return item_code 
